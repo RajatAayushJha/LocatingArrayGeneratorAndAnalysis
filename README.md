@@ -50,7 +50,7 @@ The backend of [LocatingArrayGeneratorAndAnalysis] is implemented in C++ for eff
 
 There are two ways of constructing the Locating Arrays. 
 
-- Method-1: (Work done by [Isaac Jung](https://github.com/gato flaco/Array-Checker) - link to C++ code is attached)
+- Method-1: (Work done by [Isaac Jung](https://github.com/gatoflaco/Array-Checker) - link to C++ code is attached)
   
 Here, the program begins by getting input from the command line. After doing basic syntax parsing and semantic error checking, it passes the information from input to an Array object constructor, which organizes the data in the array into groups of vectors and sets. When this is done, the main program simply calls Array methods on the instantiated object to perform each check requested. If any of the less strict checks fail, by definition the more strict ones will too, so the program doesn't bother computing them and jumps to a conclusion (unless verbose mode is enabled, in which case it will compute everything requested regardless). 
 The Array constructor creates Factor objects representing the columns in the array. It checks how many levels each Factor has, and for each factor, it instantiates Single objects for every value that factor can take on, in an array of pointers. 
