@@ -8,15 +8,15 @@
 
 [LocatingArrayGeneratorAndAnalysis] package depends on the following R packages :- 
 
-LATools
-Rcpp
-LABuilder
+- LATools
+- Rcpp
+- LABuilder
 
 Make sure to install these dependencies before using [LocatingArrayGeneratorAndAnalysis].
 
 Installation
 
-RStudio Version 2021.09.0 Build 351
+RStudio Version : 2021.09.0 Build 351
 
 This package is intended to be used in RStudio. To install, first install devtools.
 ```R
@@ -32,14 +32,12 @@ install_github("/rajataayushjha/LocatingArrayGeneratorAndAnalysis")
 
 Here is a basic example demonstrating how to use the [LocatingArrayGeneratorAndAnalysis] package:
 
-
-
-To construct Locating Array:
+- To construct Locating Array:
 ```R
 generateLA(d,t,𝛿,input_file.tsv,output_file.tsv) 
 ```
 If values of d,t,𝛿 are not provided, it will assume d=1,t=2,𝛿=1. input_file.tsv should be given everytime while executing.
-To analyze the Locating Array:
+- To analyze the Locating Array:
 ```R
 buildModels((locatingArray_path, factorData_path, response_path, response_column , logit ))
 ```
@@ -52,7 +50,7 @@ The backend of [LocatingArrayGeneratorAndAnalysis] is implemented in C++ for eff
 
 There are two ways of constructing the Locating Arrays. 
 
-Method-1: (Work done by Isaac Jung - link to C++ code is attached)
+- Method-1: (Work done by Isaac Jung - link to C++ code is attached)
 Here, the program begins by getting input from the command line. After doing basic syntax parsing and semantic error checking, it passes the information from input to an Array object constructor, which organizes the data in the array into groups of vectors and sets. When this is done, the main program simply calls Array methods on the instantiated object to perform each check requested. If any of the less strict checks fail, by definition the more strict ones will too, so the program doesn't bother computing them and jumps to a conclusion (unless verbose mode is enabled, in which case it will compute everything requested regardless). 
 The Array constructor creates Factor objects representing the columns in the array. It checks how many levels each Factor has, and for each factor, it instantiates Single objects for every value that factor can take on, in an array of pointers. 
 
@@ -70,7 +68,7 @@ For checking (d, t)-location, the is_locating() method is called by the main pro
 
  For checking (d, t, δ)-detection, the is_detecting() method is called by the main program. The method iterates over all Interactions, and for each Interaction, it iterates over all Ts. Then, for a given (Interaction, T) pair, the method ensures that either (a) the Interaction is a member of T, or (b) the set difference between the Interaction's rows and the T's rows is at least δ in magnitude. If the separation between a given Interaction and T is less than δ, the user is informed of the issue, and as with the previous methods, a boolean is set to false. Also like the previous methods, it is possible to immediately return false upon discovering a single issue, when certain flags are set. If the method finishes iterating and finds no (d, t, δ)-detection issues, the method returns true. During a check for detection, the Array also updates a true_delta field, defined simply as the minimum separation between all (Interaction, T) pairs. This is useful for letting the user know that there may be an even higher separation than they intended.
 
-Method-2: ( Work done by Stephen Seidel - link to C++ code is attached)
+- Method-2: ( Work done by Stephen Seidel - link to C++ code is attached)
 
  Here, the exactFix() method, which is a part of a class named CSMatrix that constructs locating arrays. It initializes a work array of type CSCol pointers with a size equal to the number of columns in the matrix. It copies column pointers from the data structure of the matrix into this work array. It sorts the work array using the smartSort() function, which sorts the array based on a criteria that ensures that columns are sorted in a way that maintains the order of rows as much as possible while considering the already sorted rows. This sorting operation is crucial for arranging the columns effectively to generate locating arrays. It calculates a score for the current arrangement of columns using the getArrayScore() function. This score represents the effectiveness of the locating array. The higher the score, the better the locating array. If there are no constraints on the locating array, it enters a loop to improve the locating array by adding rows until the score is reduced to zero. It prints the score and the number of rows after each iteration.
 If there are constraints on the locating array, it prints a message indicating that it's unable to perform the fixing operation due to the presence of constraints. It deallocates memory for the work array to prevent memory leaks.
@@ -106,27 +104,26 @@ Wireless network test-bed experiment : Seidel, Mehari, et al. (2018)
 
 # Reference
 
-Yasmeen Akhtar, Fan Zhang, Charles J. Colbourn, John Stufken & Violet R.
-Syrotiuk (07 Jul 2023): Scalable level-wise screening experiments using locating arrays, Journal of Quality Technology, DOI: 10.1080/00224065.2023.2220973
-Colbourn, C. J., and D. W. McClary. 2008. Locating and detecting arrays for interaction faults. Journal of Combinatorial Optimization 15 (1):17–48. doi: 10.1007/s10878-007-9082-4.
-Box, G. E. P., J. S. Hunter, and W. G. Hunter. 2005. Statistics for experimenters. 2nd ed. Hoboken, NJ: John Wiley & Sons, Inc.
-Sundberg, R. 2008. A classical dataset from Williams, and its role in the study of supersaturated designs. Journal of Chemometrics 22 (7):436–40. doi: 10.1002/cem.1167.
-Lin, D. K. J. 1993. A new class of supersaturated designs. Technometrics 35 (1):28–31. doi: 10.1080/00401706.1993. 10484990.
-Wang, P. C., N. Kettaneh-Wold, and D. K. J. Lin. 1995. Comments on Lin (1993). Technometrics 37 (3):358–9. doi: 10.2307/1269944.
-Seidel, S. A., M. T. Mehari, C. J. Colbourn, E. De Poorter, I. Moerman, and V. R. Syrotiuk. 2018. Analysis of largescale experimental data from wireless networks. In IEEE INFOCOM 2018 - IEEE Conference on Computer Communications Workshops (INFOCOM WKSHPS), 535– 540, April.
+1. Yasmeen Akhtar, Fan Zhang, Charles J. Colbourn, John Stufken & Violet R. Syrotiuk (07 Jul 2023): Scalable level-wise screening experiments using locating arrays, Journal of Quality Technology, DOI: 10.1080/00224065.2023.2220973
+2. Colbourn, C. J., and D. W. McClary. 2008. Locating and detecting arrays for interaction faults. Journal of Combinatorial Optimization 15 (1):17–48. doi: 10.1007/s10878-007-9082-4.
+3. Box, G. E. P., J. S. Hunter, and W. G. Hunter. 2005. Statistics for experimenters. 2nd ed. Hoboken, NJ: John Wiley & Sons, Inc.
+4. Sundberg, R. 2008. A classical dataset from Williams, and its role in the study of supersaturated designs. Journal of Chemometrics 22 (7):436–40. doi: 10.1002/cem.1167.
+5. Lin, D. K. J. 1993. A new class of supersaturated designs. Technometrics 35 (1):28–31. doi: 10.1080/00401706.1993. 10484990.
+6. Wang, P. C., N. Kettaneh-Wold, and D. K. J. Lin. 1995. Comments on Lin (1993). Technometrics 37 (3):358–9. doi: 10.2307/1269944.
+7. Seidel, S. A., M. T. Mehari, C. J. Colbourn, E. De Poorter, I. Moerman, and V. R. Syrotiuk. 2018. Analysis of largescale experimental data from wireless networks. In IEEE INFOCOM 2018 - IEEE Conference on Computer Communications Workshops (INFOCOM WKSHPS), 535– 540, April.
 
 
 # Acknowledgements
 
-Dr. Violet Syrotiuk - https://www.public.asu.edu/~syrotiuk/index.html
+ - Dr. Violet Syrotiuk - https://www.public.asu.edu/~syrotiuk/index.html
 
-Dr. Charles Colbourn - https://www.public.asu.edu/~ccolbou/ 
+- Dr. Charles Colbourn - https://www.public.asu.edu/~ccolbou/ 
 
-Stephen Seidel - https://github.com/syrotiuk/sseidel-la-tools 
+- Stephen Seidel - https://github.com/syrotiuk/sseidel-la-tools 
 
-Isaac Jung - https://github.com/gatoflaco/Array-Checker 
+- Isaac Jung - https://github.com/gatoflaco/Array-Checker 
 
-Leah Darwin - https://github.com/leahdarwin/LATools 
+- Leah Darwin - https://github.com/leahdarwin/LATools 
 
 
 
