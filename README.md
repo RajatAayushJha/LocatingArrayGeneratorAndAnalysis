@@ -17,15 +17,16 @@ Make sure to install these dependencies before using [LocatingArrayGeneratorAndA
 Installation
 
 RStudio Version 2021.09.0 Build 351
+
 This package is intended to be used in RStudio. To install, first install devtools.
-
+```R
 install.packages("devtools")
-
+```
 Next, load devtools and use it to install this package.
-
+```R
 library(devtools)
 install_github("/rajataayushjha/LocatingArrayGeneratorAndAnalysis")
-
+```
 
 # Usage
 
@@ -34,10 +35,14 @@ Here is a basic example demonstrating how to use the [LocatingArrayGeneratorAndA
 
 
 To construct Locating Array:
-generateLA(d,t,𝛿,input_file.tsv,output_file.tsv) - If values of d,t,𝛿 are not provided, it will assume d=1,t=2,𝛿=1. input_file.tsv should be given everytime while executing.
+```R
+generateLA(d,t,𝛿,input_file.tsv,output_file.tsv) 
+```
+If values of d,t,𝛿 are not provided, it will assume d=1,t=2,𝛿=1. input_file.tsv should be given everytime while executing.
 To analyze the Locating Array:
+```R
 buildModels((locatingArray_path, factorData_path, response_path, response_column , logit ))
-
+```
 
 # C++ Backend
 
