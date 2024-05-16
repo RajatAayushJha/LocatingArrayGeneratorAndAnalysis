@@ -92,8 +92,8 @@ Strength: The strength is the number of (factor, level)s involved in the interac
 
 # Datasets that can be used with the Tool
 
-1. [Wireless Conferencing Experiments with BEOF] (https://github.com/bmhang/wireless-conference-guide)
-2. [Screening Experiments with REACT] (https://github.com/danielkulenkamp/screening-react-guide)
+1. [Wireless Conferencing Experiments with BEOF](https://github.com/bmhang/wireless-conference-guide)
+2. [Screening Experiments with REACT](https://github.com/danielkulenkamp/screening-react-guide)
 3. Chemical reactor experiment : Box, Hunter, and Hunter (2005) describe a chemical reactor experiment with five binary factors A–E. The experiment is run as a 25 full-factorial, and the original analysis indicates that B, D, E, B x D, and D x E are active.
 4. Rubber experiment : 
   - A (1,2,1)-locating array including runs 1-11,13,15-17,22-25,and 28 from the data set presented in the Appendix of (Sundberg, 2008). It contains the 14-run half-fraction supersaturated design described in (Lin, 1993). 
